@@ -22,7 +22,10 @@ public class PlayerColor
 
 public class GameController : MonoBehaviour
 {
-    
+    [SerializeField] private AudioSource wineffect;
+    [SerializeField] private AudioSource equaleffect;
+    [SerializeField] private AudioSource btclickeffect;
+
     public Text[] buttonList;
     private string playerSide;
 
@@ -65,6 +68,7 @@ public class GameController : MonoBehaviour
                 value = Random.Range(0, 8);
                 if (buttonList [value].GetComponentInParent<Button> ().interactable == true)
                 {
+                    btclickeffect.Play();
                     buttonList [value].text = GetComputerSide();
                     buttonList [value].GetComponentInParent<Button> ().interactable = false;
                     EndTurn();
@@ -223,11 +227,13 @@ public class GameController : MonoBehaviour
 
           if (winningPlayer == "draw")
           {
-                SetGameOverText("It's a Draw");   
+            equaleffect.Play();
+            SetGameOverText("It's a Draw");   
                 SetPlayerColorsInactive();
           }
           else{
-                SetGameOverText(winningPlayer + " Wins!");
+            wineffect.Play();
+            SetGameOverText(winningPlayer + " Wins!");
                 
           }
 

@@ -7,7 +7,8 @@ public class GridSpace : MonoBehaviour
 {
     public Button button;
     public Text buttonText;
-  
+    [SerializeField] private AudioSource btclickeffect;
+
 
     private GameController gameController;
 
@@ -16,6 +17,7 @@ public class GridSpace : MonoBehaviour
     {
         if (gameController.playerMove == true )
         {
+            btclickeffect.Play();
             buttonText.text = gameController.GetPlayerSide();
             button.interactable = false;
             gameController.EndTurn();
